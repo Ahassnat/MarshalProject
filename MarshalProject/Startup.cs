@@ -29,11 +29,13 @@ namespace MarshalProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-           
-            services.AddDbContext<DataContext>(opt => 
-            {
-                opt.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings"));
-            });
+
+            services.AddDbContext<DataContext>(opt =>
+
+                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                sqlServerOptions => sqlServerOptions.UseNetTopologySuite())
+
+          );
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                     .AddEntityFrameworkStores<DataContext>();
