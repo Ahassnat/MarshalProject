@@ -9,6 +9,13 @@ namespace MarshalProject.Model
 {
     public class ApplicationUser:IdentityUser
     {
+        public int IdentityCardNumber { get; set; }
+        
+        public Area Area { get; set; }
+        public string AreaName  { get; set; }
+        //public double Longitude { get; set; }//x
+        //public double Latitude { get; set; }//y
         public Point Location { get; set; }
+
     }
 }

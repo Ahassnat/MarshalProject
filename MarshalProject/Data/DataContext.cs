@@ -14,5 +14,7 @@ namespace MarshalProject.Data
         {
 
         }
+        public DbSet<Area> Areas { get; set; }
+        public DbSet<Shelter> Shelters { get; set; }
     }
 }

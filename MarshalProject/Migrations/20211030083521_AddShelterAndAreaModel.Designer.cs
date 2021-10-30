@@ -4,15 +4,17 @@ using MarshalProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 
 namespace MarshalProject.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211030083521_AddShelterAndAreaModel")]
+    partial class AddShelterAndAreaModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,9 +57,6 @@ namespace MarshalProject.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("AreaName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -68,9 +67,6 @@ namespace MarshalProject.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<int>("IdentityCardNumber")
-                        .HasColumnType("int");
 
                     b.Property<Point>("Location")
                         .HasColumnType("geography");
@@ -151,9 +147,7 @@ namespace MarshalProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Areas");
                 });
@@ -283,8 +277,8 @@ namespace MarshalProject.Migrations
             modelBuilder.Entity("MarshalProject.Model.Area", b =>
                 {
                     b.HasOne("MarshalProject.Model.ApplicationUser", "User")
-                        .WithOne("Area")
-                        .HasForeignKey("MarshalProject.Model.Area", "UserId");
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
