@@ -16,5 +16,22 @@ namespace MarshalProject.Data
         }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Shelter> Shelters { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+
+            builder.Entity<ApplicationUser>()
+                .HasMany(ur => ur.UserRoles)
+                .WithOne(u => u.User)
+                .HasForeignKey(ur => ur.UserId)
+                .IsRequired();
+
+            builder.Entity<ApplicationRole>()
+                .HasMany(ur => ur.UserRoles)
+                .WithOne(u => u.Role)
+                .HasForeignKey(ur => ur.RoleId)
+                .IsRequired();
+        }
     }
-}
+    }

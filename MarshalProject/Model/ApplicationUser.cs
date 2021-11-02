@@ -16,6 +16,7 @@ namespace MarshalProject.Model
         //public double Longitude { get; set; }//x
         //public double Latitude { get; set; }//y
         public Point Location { get; set; }
+        public ICollection<ApplicationUserRoles> UserRoles { get; set; }
 
     }
 }
